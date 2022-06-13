@@ -145,8 +145,8 @@ async def on_message(message):
 		print("detected self post")
 		return
 	if message.content.startswith("!"):
-	await bot.process_commands(message)
-	return
+		await bot.process_commands(message)
+		return
 	lang = "en"
 	if message.content.startswith("🇯🇵"):
 		lang = "jp"
