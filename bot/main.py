@@ -155,10 +155,10 @@ async def on_message(message):
         tone = result[0]["label"]
 
     vp, v_np, subj = extract_topic(message.content)
-    
+    print("vp, v_np, subj = ",vp,v_np, subj)
     if v_np == "":
-        await message.channel.send("care to elaborate what exactly who or what \'{}\'?".format(vp))
-        if bot.userlist.has_key(message.author.id):
+        await message.channel.send("it isn't quite clear what topic you're on about. care to elaborate?")
+        if message.author.id in bot.userlist:
             if bot.userlist[message.author.id][2] == "BFF":
                 await message.channel.send(bot.lines["friend"][tone][lang])
             if bot.userlist[message.author.id][2] == "friend":
