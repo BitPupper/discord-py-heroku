@@ -80,7 +80,7 @@ def question(topic_token):
 
 @bot.command()
 async def greet(ctx, message):
-	if message.content.startswith("🇯🇵"):
+	if message.startswith("🇯🇵"):
 		await ctx.send("{greeting}、{user}！".format(greeting=random.choice(bot.lines["greet"]["jp"]), user=ctx.author.mention))
 	else:
 		await ctx.send("{greeting},{user}!".format(greeting=random.choice(bot.lines["greet"]["en"]), user=ctx.author.mention))
@@ -92,17 +92,17 @@ async def greet(ctx, message):
 
 @bot.command()
 async def playlist(ctx, message):
-	if ("calm" in message.content):
+	if ("calm" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQUQNTXLk8rX6Nb-_uCemW2F&feature=share")
-	elif ("calmer" in message.content):
+	elif ("calmer" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQWU0sdiUAx5k0RuQCNfIBcV")
-	elif ("comfort" in message.content):
+	elif ("comfort" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQXaMJU4uwi9I50kudfQI6u_&feature=share")
-	elif ("upbeat" in message.content):
+	elif ("upbeat" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQUKJCZ3nDiEz3IqI6oac_NF")
-	elif ("lofi" in message.content):
+	elif ("lofi" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQX5VNDsNYDVr7qJ5f4hPS3F&feature=share")
-	elif ("soundtracks" in message.content):
+	elif ("soundtracks" in message):
 		await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQWYKxVpIJRO90ocQp_IXwVy&feature=share")
 	else:
 		await ctx.send("I don't have a playlist for that topic. See the pinned comment for documentation!")
@@ -117,7 +117,7 @@ hagrid_pfp = "./hagger.jpg"
 @bot.command()
 async def switch_persona(ctx, message):
 	nickname ="bot"
-	if "bob" in message.content.lower():
+	if "bob" in message.lower():
 		bot.persona = "bald"
 		fp = open(frog_pfp, 'rb')
 		pfp = fp.read()
@@ -173,7 +173,7 @@ async def on_message(message):
 			if bot.userlist[message.author.id][2] == "MORTAL ENEMY":
 				await message.channel.send(bot.lines["dislike"][tone][lang])
 		else:
-			await message.channel.send(bot.lines["stranger"][tone][lang])
+			await message.channel.send(bot.lines["stranger"][lang])
 	else:
 		if (v_np in bot.interests[bot.persona]):
 			await message.channel.send(bot.interests[bot.persona][v_np][lang])
