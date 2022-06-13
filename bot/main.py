@@ -206,19 +206,20 @@ def update_relation(author_id, user_id, sentiment_score):
 
 def extract_topic(s):
     #s_pos = s[:]
-    chunk_result = chunk_tagger.predict(s)
+    s_copy = s+""
+    chunk_result = chunk_tagger.predict(s_copy)
     #pos_result = pos_tagger.predict(s_pos)
     verb = ""
     obj = ""
     subj = ""
-    for phrase in s.labels:
-        if phrase.value == "VP":
-            verb = phrase.value
-        elif phrase.value == "NP" and verb != "":
+    for phrase in s_copy:
+        if phrase.get_label('np').value == "VP":
+            verb = phrase.text
+        elif phrase.get_label('np').value == "NP" and verb != "":
             if verb != "":
-                subj = phrase.value
+                subj = phrase.text
             else:
-                obj = phrase.value
+                obj = phrase.text
             break
     return verb, obj, subj
 
