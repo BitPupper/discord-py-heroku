@@ -144,6 +144,9 @@ async def on_message(message):
     if message.author == client.user or message.author.id == 983105885691858994:
         print("detected self post")
         return
+    if message.content.startswith("!"):
+	await bot.process_commands(message)
+	return
     lang = "en"
     if message.content.startswith("🇯🇵"):
         lang = "jp"
@@ -164,9 +167,9 @@ async def on_message(message):
             if bot.userlist[message.author.id][2] == "friend":
                 await message.channel.send(bot.lines["friend"][tone][lang])
             if bot.userlist[message.author.id][2] == "acquaintance":
-                await message.channel.send(bot.lines["stranger"][tone][lang])
+                await message.channel.send(bot.lines["stranger"][lang])
             if bot.userlist[message.author.id][2] == "stranger":
-                await message.channel.send(bot.lines["stranger"][tone][lang])
+                await message.channel.send(bot.lines["stranger"][lang])
             if bot.userlist[message.author.id][2] == "MORTAL ENEMY":
                 await message.channel.send(bot.lines["dislike"][tone][lang])
         else:
