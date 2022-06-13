@@ -154,9 +154,7 @@ async def on_message(message):
     if message.author == client.user:
         print("detected self post")
         return
-    
-    sentence = Sentence(message.content)
-    vp, v_np, subj = extract_topic(sentence)
+    vp, v_np, subj = extract_topic(message.content)
     
     if v_np == "":
         await message.channel.send("care to elaborate what exactly who or what \'{}\'?".format(vp))
@@ -205,14 +203,13 @@ def update_relation(author_id, user_id, sentiment_score):
         bot.userlist[user_id][2] = "MORTAL ENEMY"
 
 def extract_topic(s):
-    #s_pos = s[:]
-    s_copy = s+""
-    chunk_result = chunk_tagger.predict(s_copy)
+    sentence = Sentence(s)
+    chunk_result = chunk_tagger.predict(sentence)
     #pos_result = pos_tagger.predict(s_pos)
     verb = ""
     obj = ""
     subj = ""
-    for phrase in s_copy:
+    for phrase in sentence:
         if phrase.get_label('np').value == "VP":
             verb = phrase.text
         elif phrase.get_label('np').value == "NP" and verb != "":
