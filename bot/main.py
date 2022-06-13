@@ -80,7 +80,7 @@ def question(topic_token):
 
 @bot.command()
 async def greet(ctx, message):
-    if message.startswith("🇯🇵"):
+    if message.content.startswith("🇯🇵"):
         await ctx.send("{greeting}、{user}！".format(greeting=random.choice(bot.lines["greet"]["jp"]), user=ctx.author.mention))
     else:
         await ctx.send("{greeting},{user}!".format(greeting=random.choice(bot.lines["greet"]["en"]), user=ctx.author.mention))
@@ -92,17 +92,17 @@ async def greet(ctx, message):
 
 @bot.command()
 async def playlist(ctx, message):
-    if ("calm" in message):
+    if ("calm" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQUQNTXLk8rX6Nb-_uCemW2F&feature=share")
-    elif ("calmer" in message):
+    elif ("calmer" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQWU0sdiUAx5k0RuQCNfIBcV")
-    elif ("comfort" in message):
+    elif ("comfort" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQXaMJU4uwi9I50kudfQI6u_&feature=share")
-    elif ("upbeat" in message):
+    elif ("upbeat" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQUKJCZ3nDiEz3IqI6oac_NF")
-    elif message == "lofi":
+    elif ("lofi" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQX5VNDsNYDVr7qJ5f4hPS3F&feature=share")
-    elif message == "soundtracks":
+    elif ("soundtracks" in message.content):
         await ctx.send(f"https://music.youtube.com/playlist?list=PLDkI5DGFbBQWYKxVpIJRO90ocQp_IXwVy&feature=share")
     else:
         await ctx.send("I don't have a playlist for that topic. See the pinned comment for documentation!")
@@ -117,7 +117,7 @@ hagrid_pfp = "./hagger.jpg"
 @bot.command()
 async def switch_persona(ctx, message):
     nickname ="bot"
-    if "bald" in message.lower():
+    if "bob" in message.content.lower():
         bot.persona = "bald"
         fp = open(frog_pfp, 'rb')
         pfp = fp.read()
@@ -142,7 +142,7 @@ async def friendlist(ctx):
 async def on_message(message):
     print("on_message called")
     lang = "en"
-    if message.startswith("🇯🇵"):
+    if message.content.startswith("🇯🇵"):
         lang = "jp"
     result=sentiment_task(message)
     tone = "NEUTRAL"
@@ -155,7 +155,7 @@ async def on_message(message):
         print("detected self post")
         return
     
-    sentence = Sentence(message)
+    sentence = Sentence(message.content)
     vp, v_np, subj = extract_topic(sentence)
     
     if v_np == "":
@@ -180,11 +180,11 @@ async def on_message(message):
             await message.channel.send(bot.interests[bot.persona][subj][lang])
         else:
             if tone == "NEGATIVE":
-                await message.channel.send("sounds like "+v_np+" isn't a nice topic for "+subject_token.lemma_)
+                await message.channel.send("sounds like "+v_np+" isn't a nice topic for "+subj)
             elif tone == "POSITIVE":
                 await message.channel.send("sounds like "+vp+" was/is a good thing!")
             elif tone == "NEUTRAL":
-                await message.channel.send("hmm i wonder how i would feel about "+n-vp)
+                await message.channel.send("hmm i wonder how i would feel about "+v_np)
 
 def update_relation(author_id, user_id, sentiment_score):
     MAX_POINT_DIFF = 10
