@@ -1,5 +1,7 @@
 import os
 bot_token = os.getenv("bot_token")
+import flair, torch
+flair.device = torch.device('cpu')
 from transformers import pipeline
 from flair.data import Sentence
 from flair.models import SequenceTagger
