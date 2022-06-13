@@ -141,6 +141,9 @@ async def friendlist(ctx):
 @bot.event
 async def on_message(message):
     print("on_message called")
+    if message.author == client.user or message.author.id == 983105885691858994:
+        print("detected self post")
+        return
     lang = "en"
     if message.content.startswith("🇯🇵"):
         lang = "jp"
@@ -150,10 +153,7 @@ async def on_message(message):
         tone = "NEUTRAL"
     else:
         tone = result[0]["label"]
-    
-    if message.author == client.user:
-        print("detected self post")
-        return
+
     vp, v_np, subj = extract_topic(message.content)
     
     if v_np == "":
