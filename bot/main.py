@@ -144,7 +144,7 @@ async def on_message(message):
     lang = "en"
     if message.content.startswith("🇯🇵"):
         lang = "jp"
-    result=sentiment_task(message)
+    result=sentiment_task(message.content)
     tone = "NEUTRAL"
     if result[0]["score"] < sentiment_thresh:
         tone = "NEUTRAL"
