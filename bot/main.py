@@ -205,14 +205,13 @@ def update_relation(author_id, user_id, sentiment_score):
         bot.userlist[user_id][2] = "MORTAL ENEMY"
 
 def extract_topic(s):
-    s_chunk = s[:]
     #s_pos = s[:]
-    chunk_result = chunk_tagger.predict(s_chunk)
+    chunk_result = chunk_tagger.predict(s)
     #pos_result = pos_tagger.predict(s_pos)
     verb = ""
     obj = ""
     subj = ""
-    for phrase in s_chunk.labels:
+    for phrase in s.labels:
         if phrase.value == "VP":
             verb = phrase.value
         elif phrase.value == "NP" and verb != "":
