@@ -168,7 +168,7 @@ async def on_message(message):
 	
 	if subj == "":
 		if tone == "POSITIVE":
-	    	await message.channel.send(vp+" "+v_np+" sounds like fun")
+			await message.channel.send(vp+" "+v_np+" sounds like fun")
 		elif tone == "NEGATIVE":
 		else:
 		return
@@ -231,15 +231,15 @@ def extract_topic(s):
 	subj = ""
 	for phrase in sentence.get_spans("np"):
 	    if phrase.tag == "VP":
-		vp = getInflection(getLemma(phrase.text, upos = "VERB")[0], tag='VBG')[0]
-		verb_phrase_flag = True
-	    else:
-		if phrase.tag == "NP" and subj=="":
-		    if verb_phrase_flag:
-			v_np = phrase.text
-			break
-		    else:
-			subj = phrase.text
+			vp = getInflection(getLemma(phrase.text, upos = "VERB")[0], tag='VBG')[0]
+			verb_phrase_flag = True
+		else:
+			if phrase.tag == "NP" and subj=="":
+				if verb_phrase_flag:
+					v_np = phrase.text
+					break
+			else:
+				subj = phrase.text
 	#print("vp=",vp)
 	#print("v_np=",v_np)
 	#print("subj=",subj)	
