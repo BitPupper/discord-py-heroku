@@ -9,6 +9,7 @@ from discord.ext import commands
 from discord import Client
 import random
 from tabulate import tabulate
+from lemminflect import getInflection, getLemma
 
 sentiment_task = pipeline("sentiment-analysis")
 
@@ -16,7 +17,12 @@ chunk_tagger = SequenceTagger.load("flair/chunk-english-fast")
 
 client = Client()
 bot = commands.Bot(command_prefix='!')
+
 sentiment_thresh = 0.1
+first_to_second_person = {"i":"you","my":"your","mine":"yours","you":"i","your":"my","yours":"mine"}
+abbr = {"tbh":"to be honest", "idk":"i don't know","lol":"laughing out loud", "asap":"as soon as possible","fyi":"for your information", "gtg":"got to go","fyb":"for your benefit","ttyl":"talk to you later","imo":"in my opinion","ty":"thank you","thx":"thank you","tysm":"thank you so much","tyvm":"thank you very much", "plz":"please","r":"are","u":"you","urs":"yours","ur":"your","idts":"i don't think so","ikr":"i know, right", "rly":"really","lmao":"laughing my ass off", "smh","shaking my head", "ppl":"people"}
+def normalize(text):
+    return ' '.join([abbr.get(word,word) for word in text.split()])
 
 bot.lines = {
 	"greet":{
@@ -86,6 +92,7 @@ async def greet(ctx, message):
 		await ctx.send("{greeting},{user}!".format(greeting=random.choice(bot.lines["greet"]["en"]), user=ctx.author.mention))
 	if not (message.author.id in bot.userlist):
 		bot.userlist[message.author.id] = [message.author.display_name, 31, "acquaintance"]
+		print("added "+message.author.display_name+" as new contact!")
 
 #if ("dialect" in message) and ("japanese" in message):
 #		await ctx.send(bot.lines["dialect"]["en"]+"https://osaka.uda2.com/"+"\n"+"http://www.shirakami.or.jp/~kinoka/akitaben/akitaben.html")
@@ -136,7 +143,7 @@ async def switch_persona(ctx, message):
 
 @bot.command()
 async def friendlist(ctx):
-	await ctx.send(tabulate(list(bot.userlist.values()), headers=["Name", "Points", "Title"]))
+	await ctx.send(tabulate(bot.userlist.values(), headers=["Name", "Points", "Title"]))
 
 @bot.event
 async def on_message(message):
@@ -158,9 +165,15 @@ async def on_message(message):
 		tone = result[0]["label"]
 
 	vp, v_np, subj = extract_topic(message.content)
-	print("vp, v_np, subj = ",vp,v_np, subj)
+	
+	if subj == "":
+		if tone == "POSITIVE":
+	    	await message.channel.send(vp+" "+v_np+" sounds like fun")
+		elif tone == "NEGATIVE":
+		else:
+		return
+	
 	if v_np == "":
-		await message.channel.send("it isn't quite clear what topic you're on about. care to elaborate?")
 		if message.author.id in bot.userlist:
 			if bot.userlist[message.author.id][2] == "BFF":
 				await message.channel.send(bot.lines["friend"][tone][lang])
@@ -181,11 +194,14 @@ async def on_message(message):
 			await message.channel.send(bot.interests[bot.persona][subj][lang])
 		else:
 			if tone == "NEGATIVE":
-				await message.channel.send("sounds like "+v_np+" isn't a nice topic for "+subj)
+				await message.channel.send("what's wrong with "+' '.join([first_to_second_person.get(word,word) for word in subj.split()])+"...?")
 			elif tone == "POSITIVE":
-				await message.channel.send("sounds like "+vp+" was/is a good thing!")
+				await message.channel.send(vp+" "+v_np+" sounds like fun!")
 			elif tone == "NEUTRAL":
-				await message.channel.send("hmm i wonder how i would feel about "+v_np)
+				await message.channel.send("I wonder if I'd like "+vp+" "+v_np+" with "+' '.join([first_to_second_person.get(word,word) for word in subj.split()]))
+	for user in message.raw_mentions:
+		if user in bot.userlist:
+			update_relation(message.author.id, user, result[0]["score"])
 
 def update_relation(author_id, user_id, sentiment_score):
 	MAX_POINT_DIFF = 10
@@ -206,22 +222,28 @@ def update_relation(author_id, user_id, sentiment_score):
 		bot.userlist[user_id][2] = "MORTAL ENEMY"
 
 def extract_topic(s):
-	sentence = Sentence(s)
-	chunk_result = chunk_tagger.predict(sentence)
-	#pos_result = pos_tagger.predict(s_pos)
-	verb = ""
-	obj = ""
+	sentence = Sentence(normalize(s))
+	chunk_tagger.predict(sentence)
+
+	verb_phrase_flag = False
+	vp = ""
+	v_np = ""
 	subj = ""
-	for phrase in sentence:
-		if phrase.get_label('np').value == "VP":
-			verb = phrase.text
-		elif phrase.get_label('np').value == "NP" and verb != "":
-			if verb != "":
-				subj = phrase.text
-			else:
-				obj = phrase.text
+	for phrase in sentence.get_spans("np"):
+	    if phrase.tag == "VP":
+		vp = getInflection(getLemma(phrase.text, upos = "VERB")[0], tag='VBG')[0]
+		verb_phrase_flag = True
+	    else:
+		if phrase.tag == "NP" and subj=="":
+		    if verb_phrase_flag:
+			v_np = phrase.text
 			break
-	return verb, obj, subj
+		    else:
+			subj = phrase.text
+	#print("vp=",vp)
+	#print("v_np=",v_np)
+	#print("subj=",subj)	
+	return vp, v_np, subj
 
 if __name__ == "__main__":
 	bot.run(bot_token)
