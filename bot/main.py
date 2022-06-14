@@ -178,17 +178,17 @@ async def on_message(message):
 	if v_np == "":
 		if message.author.id in bot.userlist:
 			if bot.userlist[message.author.id][2] == "BFF":
-				await message.channel.send(bot.lines["friend"][tone][lang])
+				await message.channel.send(random.choice(bot.lines["friend"][tone][lang]))
 			if bot.userlist[message.author.id][2] == "friend":
-				await message.channel.send(bot.lines["friend"][tone][lang])
+				await message.channel.send(random.choice(bot.lines["friend"][tone][lang]))
 			if bot.userlist[message.author.id][2] == "acquaintance":
-				await message.channel.send(bot.lines["stranger"][lang])
+				await message.channel.send(random.choice(bot.lines["stranger"][lang]))
 			if bot.userlist[message.author.id][2] == "stranger":
-				await message.channel.send(bot.lines["stranger"][lang])
+				await message.channel.send(random.choice(bot.lines["stranger"][lang]))
 			if bot.userlist[message.author.id][2] == "MORTAL ENEMY":
-				await message.channel.send(bot.lines["dislike"][tone][lang])
+				await message.channel.send(random.choice(bot.lines["dislike"][tone][lang]))
 		else:
-			await message.channel.send(bot.lines["stranger"][lang])
+			await message.channel.send(random.choice(bot.lines["stranger"][lang]))
 	else:
 		if (v_np in bot.interests[bot.persona]):
 			await message.channel.send(bot.interests[bot.persona][v_np][lang])
