@@ -232,7 +232,7 @@ def extract_topic(s):
 	v_np = ""
 	subj = ""
 	for phrase in sentence.get_spans("np"):
-	    if phrase.tag == "VP":
+		if phrase.tag == "VP":
 			vp = getInflection(getLemma(phrase.text, upos = "VERB")[0], tag='VBG')[0]
 			verb_phrase_flag = True
 		else:
