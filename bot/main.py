@@ -20,7 +20,7 @@ bot = commands.Bot(command_prefix='!')
 
 sentiment_thresh = 0.1
 first_to_second_person = {"i":"you","my":"your","mine":"yours","you":"i","your":"my","yours":"mine"}
-abbr = {"tbh":"to be honest", "idk":"i don't know","lol":"laughing out loud", "asap":"as soon as possible","fyi":"for your information", "gtg":"got to go","fyb":"for your benefit","ttyl":"talk to you later","imo":"in my opinion","ty":"thank you","thx":"thank you","tysm":"thank you so much","tyvm":"thank you very much", "plz":"please","r":"are","u":"you","urs":"yours","ur":"your","idts":"i don't think so","ikr":"i know, right", "rly":"really","lmao":"laughing my ass off", "smh","shaking my head", "ppl":"people"}
+abbr = {"tbh":"to be honest", "idk":"i don't know","lol":"laughing out loud", "asap":"as soon as possible","fyi":"for your information", "gtg":"got to go","fyb":"for your benefit","ttyl":"talk to you later","imo":"in my opinion","ty":"thank you","thx":"thank you","tysm":"thank you so much","tyvm":"thank you very much", "plz":"please","r":"are","u":"you","urs":"yours","ur":"your","idts":"i don't think so","ikr":"i know, right", "rly":"really","lmao":"laughing my ass off", "smh":"shaking my head", "ppl":"people"}
 def normalize(text):
     return ' '.join([abbr.get(word,word) for word in text.split()])
 
