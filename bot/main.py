@@ -170,7 +170,9 @@ async def on_message(message):
 		if tone == "POSITIVE":
 			await message.channel.send(vp+" "+v_np+" sounds like fun")
 		elif tone == "NEGATIVE":
+			await message.channel.send("what's bad about " + vp+" "+v_np + "?")
 		else:
+			await message.channel.send("I wonder if I'd enjoy " + vp+" "+v_np)
 		return
 	
 	if v_np == "":
