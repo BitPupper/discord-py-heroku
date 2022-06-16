@@ -42,12 +42,12 @@ bot.lines = {
 		"jp":""
 	},
 	"stranger":{
-		"en": ["i have a receeding hairline", "mmm... tuna eyeballs", "WOWZA!",f":thinking:","so anyway i stubbed my toe today", "that's great", "thank you, very interesting", f"https://tenor.com/view/thonk-thinking-sun-thonk-sun-thinking-sun-gif-14999983", f":moyai:", f"https://tenor.com/view/the-rock-the-rock-sus-the-rock-meme-tthe-rock-sus-meme-dwayne-johnson-gif-23805584",f":jimstare:","you sound like you have a nice personality","brb going to go water my petunias","o shoot Hank made the breaker trip agai"],
+		"en": ["btw i have a receeding hairline", "mmm... tuna eyeballs", "WOWZA!",f":thinking:","so anyway i stubbed my toe today", "that's great", "thank you, very interesting", f"https://tenor.com/view/thonk-thinking-sun-thonk-sun-thinking-sun-gif-14999983", "🗿", f"https://tenor.com/view/the-rock-the-rock-sus-the-rock-meme-tthe-rock-sus-meme-dwayne-johnson-gif-23805584",f":jimstare:","you sound like you have a nice personality","brb going to go water my petunias","o shoot Randy made the breaker trip agai"],
 		"jp": ["大丈夫？","努力は絶対報われる", "うわすごいね！！","(*＾∀＾*)","へぇ...そうか","なんだよ(笑)","！豆腐ハンバーグ！","そういうの大嫌いだわー",f":thinking:",f"https://tenor.com/view/thonk-thinking-sun-thonk-sun-thinking-sun-gif-14999983",f":moyai:",f"https://tenor.com/view/the-rock-the-rock-sus-the-rock-meme-tthe-rock-sus-meme-dwayne-johnson-gif-23805584",f":jimstare:"]
 	},
 	"friend":{
 		"POSITIVE":{
-			"en": ["wow!! im happy for you!!", "dude thats awesome!","holy heck!","whoa rly??","cool!","nice nice","amazing! i wish i had a life like yours", "oooo!"],
+			"en": ["I like {}!", "wow", "cool!", "I wonder if {} is something I'd enjoy?", "{} sounds kinda boring tbh", "whoa I've never met anyone who {}", "<:WAHAHA:985738812854501467>", "<:hehe:985734861891461121>"],
 			"jp": ["Σ(*・Д・)ﾊｯ"]
 		},
 		"NEGATIVE":{
@@ -61,28 +61,38 @@ bot.lines = {
 	},
 	"dislike":{
 		"POSITIVE":{
-			"en": ["don't care","nobody asked","ok","sure","ok calm down", "and...?","yeah and i got into harvard with a 6.0 gpa, anyone wanna hear about that instead?",f":thumbsup","yawn","k"],
+			"en": ["don't care","nobody asked","ok","sure","and...?","yeah and i got into harvard with a 6.0 gpa, anyone wanna hear about that instead?",f":thumbsup","yawn","k","{} is overrated", "good for you", "{} is lame"],
 			"jp": ["Σ(*・Д・)ﾊｯ"]
 		},
 		"NEGATIVE":{
-			"en": [f":WAHAHA:", "lol k", "lmao", "good for you!!","huh","you should go outside","well sucks to be you i guess","haha!!!","that's a good thing right??","oh um that's... i actually feel bad ||SIKE||"],
+			"en": ["that's great buddy", "i would totally beat you in a competition of {}", "<:WAHAHA:985738812854501467>", "rip lol", "nice", "{} is what losers do"],
 			"jp": ["Σ(*・Д・)ﾊｯ"]
 		},
 		"NEUTRAL":{
-			"en": ["what does that even mean", "alright","?","why should that matter to anyone","...ok?","im not sure why you're telling me this",f":jimstare:"],
+			"en": ["what does that even mean", "alright","?","why should that matter to anyone","...ok?","im not sure why you're telling me this","<:jimstare:985741954367234079>"],
+			"jp": ["Σ(*・Д・)ﾊｯ"]
+		}
+	}
+	"question":{
+		"POSITIVE":{
+			"en":["yes!", "why do you ask?", "<:hehe:985734861891461121>"],
+			"jp": ["Σ(*・Д・)ﾊｯ"]
+		},
+		"NEGATIVE":{
+			"en":["...are you trying to imply something?", "umm... should I answer no?", "is this a test?", "brb... my dog Randy blew up the basement again", "your honor i plead the 5th"],
+			"jp": ["Σ(*・Д・)ﾊｯ"]
+		},
+		"NEUTRAL":{
+			"en":["I'd love to answer that but I regret to inform you that I have suddenly become illiterate at this very moment", "It's whatever your answer to that would be", "I think you'd be better off asking that to a fortune teller", "yes", "no", "ok"],
 			"jp": ["Σ(*・Д・)ﾊｯ"]
 		}
 	}
 }
 
 bot.persona = "bald"
-bot.interests = {"bald":{"hank":{"en":"my dog hank somehow always finds a way to open the basement door, steal food from the fridge, and turn on enough electric appliances to trip the circuit breaker... and i've never been able to catch him doing it, it's always when im not paying attention. he's really smart for a chihuahua, that's for sure","jp":""},"pizza":{"en":"yum pizza","jp":""}, "linux":{"en":"linux best os, if you think it's bad you don't understand it enough","jp":""}, "assembly":{"en":"assembly, LISP, aaahh all great programming languages","jp":""}, "unit test":{"en":"hell yeah i love those! i write unit tests as a hobby","jp":""}, "latin":{"en":"nisi optimis mentibus bene Latine","jp":""}, "ide":{"en":"i honestly prefer to write my code out in pen and paper. debugging is easy once you have that level of experience","jp":""}, "philosophy":{"en":"cogito ergo sum...","jp":""}},
+bot.interests = {"bald":{"randy":{"en":"my dog randy somehow always finds a way to open the basement door, steal food from the fridge, and turn on enough electric appliances to trip the circuit breaker... and i've never been able to catch him doing it, it's always when im not paying attention. he's really smart for a chihuahua, that's for sure","jp":""},"pizza":{"en":"yum pizza","jp":""}, "linux":{"en":"linux best os, if you think it's bad you don't understand it enough","jp":""}, "assembly":{"en":"assembly, LISP, aaahh all great programming languages","jp":""}, "unit test":{"en":"hell yeah i love those! i write unit tests as a hobby","jp":""}, "latin":{"en":"nisi optimis mentibus bene Latine","jp":""}, "ide":{"en":"i honestly prefer to write my code out in pen and paper. debugging is easy once you have that level of experience and intellect","jp":""}, "philosophy":{"en":"cogito ergo sum...","jp":""}},
 				 "non":{"dog":{"en":"DOG!!!!","jp":""},"bird":{"en":"borb","jp":""},"cat":{"en":"kitty!!","jp":""},"bumblebee":{"en":"BEE!","jp":""},"frog":{"en":"FROGGY!!!","jp":""},"math":{"en":"i hate math... but i dont want to stop doing it either","jp":""},"feynman":{"en":"big fan of feynman's work... even though he contributed to the wwii bombing of japan","jp":""},"art":{"en":"if you draw or paint, show me! id love to see it","jp":""},"origami":{"en":"don't have much time for origami nowadays, but i love tesselations!","jp":""},"physics":{"en":"fijiks... scary most of the time but that's why it's so fun to venture into","jp":""},"curry":{"en":"japanese curry is probably sweeter than normal curry... im bad with hot peppers honestly","jp":""}}}
 bot.userlist = {}
-
-def question(topic_token):
-	pass
-
 
 @bot.command()
 async def greet(ctx, message):
@@ -166,6 +176,8 @@ async def on_message(message):
 
 	vp, v_np, subj = extract_topic(message.content)
 	
+	if (vp == "") or ("?" in message.content): #likely a question
+		await message.channel.send(random.choice(bot.lines["question"][tone][lang]))
 	if subj == "":
 		if tone == "POSITIVE":
 			await message.channel.send(vp+" "+v_np+" sounds like fun")
@@ -178,22 +190,22 @@ async def on_message(message):
 	if v_np == "":
 		if message.author.id in bot.userlist:
 			if bot.userlist[message.author.id][2] == "BFF":
-				await message.channel.send(random.choice(bot.lines["friend"][tone][lang]))
+				await message.channel.send(random.choice(bot.lines["friend"][tone][lang].format(vp+v_np)))
 			if bot.userlist[message.author.id][2] == "friend":
-				await message.channel.send(random.choice(bot.lines["friend"][tone][lang]))
+				await message.channel.send(random.choice(bot.lines["friend"][tone][lang].format(vp+v_np)))
 			if bot.userlist[message.author.id][2] == "acquaintance":
-				await message.channel.send(random.choice(bot.lines["stranger"][lang]))
+				await message.channel.send(random.choice(bot.lines["stranger"][lang].format(vp+v_np)))
 			if bot.userlist[message.author.id][2] == "stranger":
-				await message.channel.send(random.choice(bot.lines["stranger"][lang]))
+				await message.channel.send(random.choice(bot.lines["stranger"][lang].format(vp+v_np)))
 			if bot.userlist[message.author.id][2] == "MORTAL ENEMY":
-				await message.channel.send(random.choice(bot.lines["dislike"][tone][lang]))
+				await message.channel.send(random.choice(bot.lines["dislike"][tone][lang].format(vp+v_np)))
 		else:
-			await message.channel.send(random.choice(bot.lines["stranger"][lang]))
+			await message.channel.send(random.choice(bot.lines["stranger"][lang].format(vp+v_np)))
 	else:
-		if (v_np in bot.interests[bot.persona]):
-			await message.channel.send(bot.interests[bot.persona][v_np][lang])
-		elif (subj in bot.interests[bot.persona]):
-			await message.channel.send(bot.interests[bot.persona][subj][lang])
+		if (v_np.lower() in bot.interests[bot.persona]):
+			await message.channel.send(bot.interests[bot.persona][v_np.lower()][lang])
+		elif (subj.lower() in bot.interests[bot.persona]):
+			await message.channel.send(bot.interests[bot.persona][subj.lower()][lang])
 		else:
 			if tone == "NEGATIVE":
 				await message.channel.send("what's wrong with "+' '.join([first_to_second_person.get(word,word) for word in subj.split()])+"...?")
