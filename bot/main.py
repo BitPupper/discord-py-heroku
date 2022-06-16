@@ -72,7 +72,7 @@ bot.lines = {
 			"en": ["what does that even mean", "alright","?","why should that matter to anyone","...ok?","im not sure why you're telling me this","<:jimstare:985741954367234079>"],
 			"jp": ["Σ(*・Д・)ﾊｯ"]
 		}
-	}
+	},
 	"question":{
 		"POSITIVE":{
 			"en":["yes!", "why do you ask?", "<:hehe:985734861891461121>"],
@@ -178,6 +178,7 @@ async def on_message(message):
 	
 	if (vp == "") or ("?" in message.content): #likely a question
 		await message.channel.send(random.choice(bot.lines["question"][tone][lang]))
+		return
 	if subj == "":
 		if tone == "POSITIVE":
 			await message.channel.send(vp+" "+v_np+" sounds like fun")
