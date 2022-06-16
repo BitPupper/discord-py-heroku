@@ -89,9 +89,7 @@ bot.lines = {
 	}
 }
 
-bot.persona = "bald"
-bot.interests = {"bald":{"randy":{"en":"my dog randy somehow always finds a way to open the basement door, steal food from the fridge, and turn on enough electric appliances to trip the circuit breaker... and i've never been able to catch him doing it, it's always when im not paying attention. he's really smart for a chihuahua, that's for sure","jp":""},"pizza":{"en":"yum pizza","jp":""}, "linux":{"en":"linux best os, if you think it's bad you don't understand it enough","jp":""}, "assembly":{"en":"assembly, LISP, aaahh all great programming languages","jp":""}, "unit test":{"en":"hell yeah i love those! i write unit tests as a hobby","jp":""}, "latin":{"en":"nisi optimis mentibus bene Latine","jp":""}, "ide":{"en":"i honestly prefer to write my code out in pen and paper. debugging is easy once you have that level of experience and intellect","jp":""}, "philosophy":{"en":"cogito ergo sum...","jp":""}},
-				 "non":{"dog":{"en":"DOG!!!!","jp":""},"bird":{"en":"borb","jp":""},"cat":{"en":"kitty!!","jp":""},"bumblebee":{"en":"BEE!","jp":""},"frog":{"en":"FROGGY!!!","jp":""},"math":{"en":"i hate math... but i dont want to stop doing it either","jp":""},"feynman":{"en":"big fan of feynman's work... even though he contributed to the wwii bombing of japan","jp":""},"art":{"en":"if you draw or paint, show me! id love to see it","jp":""},"origami":{"en":"don't have much time for origami nowadays, but i love tesselations!","jp":""},"physics":{"en":"fijiks... scary most of the time but that's why it's so fun to venture into","jp":""},"curry":{"en":"japanese curry is probably sweeter than normal curry... im bad with hot peppers honestly","jp":""}}}
+bot.interests = {"randy":{"en":"my dog randy somehow always finds a way to open the basement door, steal food from the fridge, and turn on enough electric appliances to trip the circuit breaker... and i've never been able to catch him doing it, it's always when im not paying attention. he's really smart for a chihuahua, that's for sure","jp":""},"pizza":{"en":"yum pizza","jp":""}, "linux":{"en":"linux best os, if you think it's bad you don't understand it enough","jp":""}, "assembly":{"en":"assembly, LISP, aaahh all great programming languages","jp":""}, "unit test":{"en":"hell yeah i love those! i write unit tests as a hobby","jp":""}, "latin":{"en":"nisi optimis mentibus bene Latine","jp":""}, "ide":{"en":"i honestly prefer to write my code out in pen and paper. debugging is easy once you have that level of experience and intellect","jp":""}, "philosophy":{"en":"cogito ergo sum...","jp":""}}
 bot.userlist = {}
 
 @bot.command()
@@ -127,29 +125,6 @@ async def playlist(ctx, message):
 @bot.event
 async def on_ready():
 	print("ready")
-
-frog_pfp = "/freg.jpg"
-hagrid_pfp = "./hagger.jpg"
-
-@bot.command()
-async def switch_persona(ctx, message):
-	nickname ="bot"
-	if "bob" in message.lower():
-		bot.persona = "bald"
-		fp = open(frog_pfp, 'rb')
-		pfp = fp.read()
-		nickname = "nono"
-	else:
-		bot.persona = "non"
-		fp = open(hagrid_pfp, 'rb')
-		pfp = fp.read()
-		nickname ="Bob Arthur Lewis Dunn"
-	try:
-		await bot.user.edit(avatar=pfp)
-		await ctx.guild.me.edit(nick=nickname)
-		await ctx.send("Henshin!")
-	except:
-		await ctx.send("Sorry, on cooldown for changing user details!")
 
 @bot.command()
 async def friendlist(ctx):
@@ -204,9 +179,9 @@ async def on_message(message):
 			await message.channel.send(random.choice(bot.lines["stranger"][lang]).format(vp+v_np))
 	else:
 		if (v_np.lower() in bot.interests[bot.persona]):
-			await message.channel.send(bot.interests[bot.persona][v_np.lower()][lang])
+			await message.channel.send(bot.interests[v_np.lower()][lang])
 		elif (subj.lower() in bot.interests[bot.persona]):
-			await message.channel.send(bot.interests[bot.persona][subj.lower()][lang])
+			await message.channel.send(bot.interests[subj.lower()][lang])
 		else:
 			if tone == "NEGATIVE":
 				await message.channel.send("what's wrong with "+' '.join([first_to_second_person.get(word,word) for word in subj.split()])+"...?")
