@@ -201,7 +201,7 @@ async def on_message(message):
 			if bot.userlist[message.author.id][2] == "MORTAL ENEMY":
 				await message.channel.send(random.choice(bot.lines["dislike"][tone][lang].format(vp+v_np)))
 		else:
-			await message.channel.send(random.choice(bot.lines["stranger"][lang].format(vp+v_np)))
+			await message.channel.send(random.choice(bot.lines["stranger"][lang]).format(vp+v_np))
 	else:
 		if (v_np.lower() in bot.interests[bot.persona]):
 			await message.channel.send(bot.interests[bot.persona][v_np.lower()][lang])
